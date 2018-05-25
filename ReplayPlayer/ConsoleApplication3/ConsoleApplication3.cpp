@@ -53,7 +53,7 @@ void test() {
 	float a = GetSingle(pVehicle + 0x44);
 	float b = GetSingle(pVehicle + 0x48);
 	float c = GetSingle(pVehicle + 0x4C);
-	setSpeed(pVehicle, 2.0, 2.0, 2.0);
+	setSpeed(pVehicle, 0.02, 0.02, 0.02);
 }
 
 void readChosenVehicle() {
@@ -213,6 +213,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	HWND window_hook;
 	HANDLE process_hook;
 	// Main loop, repeat forever
+
 	while (true == true)
 	{
 		// Ensure we are hooked into the game				[which we aren't to begin with, and will no longer be if the game is closed]
@@ -226,7 +227,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 			window_hook = hook_in_window();
 			process_hook = hook_in_process(window_hook);
-			cout << "\"Suck my dick\" - Reynolds" << endl << endl;
+			cout << "\"Replay Reader \& Player\" - by Reynolds based on Freeplay by Dannye" << endl << endl;
 			first_run = false;
 			init_freeplay();								// Stuff to do immediately when Freeplay has been (re/)hooked in
 		}

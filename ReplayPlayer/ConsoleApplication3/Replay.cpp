@@ -6,9 +6,13 @@
 
 
 Replay::Replay() {
+	//get user home name
+	char *user = getenv("USERNAME");
+	std::string u(user);
+
 	//open replay.rep
-	std::ifstream filestr("C:\\Users\\Gerben\\Documents\\GTA San Andreas User Files\\replay.rep", std::ios::binary | std::ios::ate);
-	//std::ifstream filestr("C:\\Documents\\GTA San Andreas User Files\\replay.rep", std::ios::binary | std::ios::ate);
+	std::ifstream filestr("C:\\Users\\" + u + "\\Documents\\GTA San Andreas User Files\\replay.rep", std::ios::binary | std::ios::ate);
+
 
 	if (!filestr) {
 		std::cerr << "Unable to open file replay.rep";

@@ -9,15 +9,18 @@ HWND hook_in_window()							// Fetch the 'window hook'
 {
 	LPCWSTR a = L"gta_sa";
 	LPCWSTR b = L"GTA: San Andreas";
-	HWND window_hook = FindWindow(NULL, b);
-	while (window_hook == NULL)
+	HWND window_hook = FindWindow(NULL, a);
+	HWND window_hook2 = FindWindow(NULL, b);
+	while (window_hook == NULL && window_hook2 == NULL)
 	{							
 		// [if game not open, wait a bit, then try again...]
 		Sleep(1000);
-		window_hook = FindWindow(NULL, b);
+		window_hook = FindWindow(NULL, a);
+		window_hook2 = FindWindow(NULL, b);
 	}
 	
-	return window_hook;
+	if (window_hook) return window_hook;
+	return window_hook2;
 }
 
 HANDLE hook_in_process(HWND window_hook)		// Fetch the 'process hook'
@@ -33,6 +36,7 @@ bool process_active(HANDLE process_hook)		// Check the process is still active [
 {
 	DWORD active_status = 0;
 	GetExitCodeProcess(process_hook, &active_status);
+
 	if (active_status != STILL_ACTIVE) return false;			// [the function which does the check can fail; we treat this the same as it returning to say 'not active']
 	return true;
 }
